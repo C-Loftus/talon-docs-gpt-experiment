@@ -1,10 +1,12 @@
-import os, env
+import os
+
+import env
+
 import requests
 from bs4 import BeautifulSoup
 from langchain.document_loaders import UnstructuredURLLoader
 from langchain.text_splitter import CharacterTextSplitter
 import pickle
-import faiss
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chains import RetrievalQAWithSourcesChain
@@ -18,10 +20,12 @@ text_splitter = CharacterTextSplitter(separator='\n',
                                     chunk_overlap=200)
 
 st.title('🦜 Talon GPT: Unofficial Talon Help')
+"Ask any general questions about Talon, hardware, scripting, or any other related topics"
 "Note: Consult the Talon Slack if you are stuck or need the most up-to-date information."
 
+# verbose name for loading screen shown to the user
 @st.cache_data
-def get_urls():
+def website_source_initialization():
     sitemap = "https://talon.wiki/sitemap.xml"
     wunder = requests.get(sitemap)
     parcala = BeautifulSoup(wunder.content, "xml")
@@ -37,13 +41,15 @@ def get_urls():
     return data
 
 with st.spinner('Starting up application... '):
-    data = get_urls()
+    data = website_source_initialization()
     docs = text_splitter.split_documents(data)
     embeddings = OpenAIEmbeddings()
+
+    # verbose name for loading screen shown to the user
     @st.cache_data
-    def init_db():
+    def database_initialization():
         return FAISS.from_documents(docs, embeddings)
-    vectorStore_openAI = init_db()
+    vectorStore_openAI = database_initialization()
 
 st.divider()
 
