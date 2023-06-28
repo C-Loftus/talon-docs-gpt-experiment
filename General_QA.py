@@ -30,7 +30,7 @@ def website_source_initialization():
     wunder = requests.get(sitemap)
     parcala = BeautifulSoup(wunder.content, "xml")
 
-    urls_from_xml = ["https://talonvoice.com/docs/index.html", "https://github.com/knausj85/knausj_talon"]
+    urls_from_xml = ["https://talonvoice.com/docs/index.html", "https://github.com/knausj85/knausj_talon", "https://wiki.gpunktschmitz.com/index.php/Talon", "https://whalequench.club/blog/2019/09/03/learning-to-speak-code.html", "https://tararoys.github.io/small_cheatsheet", "https://talon-knausj-cheatsheet.netlify.app/"]
 
     loc_tags = parcala.find_all('loc')
 
