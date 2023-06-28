@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+langchain = "*"
+faiss-cpu = "*"
+openai = "*"
+unstructured = "*"
+tiktoken = "*"
+beautifulsoup4 = "*"
+streamlit = "*"
+
+[dev-packages]
+ipykernel = "*"
+
+[requires]
+python_version = "3.10"
